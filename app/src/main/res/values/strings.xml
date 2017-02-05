@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="app_name_details">Details</string>
+    <string name="action_details">details</string>
+    <string name="action_settings">settings</string>
+    <string name="app_name_preferences">Settings</string>
+</resources>
