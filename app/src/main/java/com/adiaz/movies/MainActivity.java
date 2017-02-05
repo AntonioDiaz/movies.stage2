@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_details:
-				Intent intentDetails = new Intent(this, DetailsActivity.class);
-				startActivity(intentDetails);
+				/*Intent intentDetails = new Intent(this, DetailsActivity.class);
+				startActivity(intentDetails);*/
+				Toast.makeText(this, "api " + BuildConfig.MOVIES_API_KEY, Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.action_settings:
 				Intent intentSettings = new Intent(this, SettingsActivity.class);
