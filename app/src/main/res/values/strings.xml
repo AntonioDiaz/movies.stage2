@@ -7,4 +7,14 @@
     <string name="internet_error">This app needs internet connection available.</string>
     <string name="list_item_title_example">The last mohican</string>
     <string name="query_error">Ups, something worng happend, please try again after a while</string>
+
+    <!--preferences strings-->
+    <string name="pref_sort_key">pref_sort_key</string>
+    <string name="pref_sort_title">Sort movies criteria</string>
+    <string name="pref_sort_value_popularity">popularity</string>
+    <string name="pref_sort_value_top_rated">top_rated</string>
+    <string name="pref_sort_value_defaul">@string/pref_sort_value_popularity</string>
+    <string name="pref_sort_label_popularity">Popularity</string>
+    <string name="pref_sort_label_top_rated">Top Rated</string>
+
 </resources>
