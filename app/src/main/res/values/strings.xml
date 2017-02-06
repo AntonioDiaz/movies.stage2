@@ -4,4 +4,7 @@
     <string name="action_details">details</string>
     <string name="action_settings">settings</string>
     <string name="app_name_preferences">Settings</string>
+    <string name="internet_error">This app needs internet connection available.</string>
+    <string name="list_item_title_example">The last mohican</string>
+    <string name="query_error">Ups, something worng happend, please try again after a while</string>
 </resources>

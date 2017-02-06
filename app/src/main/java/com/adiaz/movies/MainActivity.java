@@ -3,10 +3,13 @@ package com.adiaz.movies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adiaz.movies.entities.DbMoviesQuery;
 import com.adiaz.movies.utilities.NetworkUtilities;
@@ -20,17 +23,30 @@ public class MainActivity extends AppCompatActivity implements MoviesCallbak.Mov
 
 	private static Integer mpage;
 	private static final String API_KEY = BuildConfig.MOVIES_API_KEY;
-	private static TextView mTvHello;
-
+	private TextView mTvError;
+	private RecyclerView mRecyclerViewMovies;
+	private MoviesRecyclerViewAdapter mAdapterMovies;
+	private ProgressBar mProgressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mTvHello = (TextView)findViewById(R.id.tv_hello);
-		// TODO: 06/02/2017 check if network
+		mTvError = (TextView)findViewById(R.id.tv_error);
+		mRecyclerViewMovies = (RecyclerView)findViewById(R.id.rv_movies);
+		mProgressBar= (ProgressBar)findViewById(R.id.pb_movies);
 		mpage = 1;
+
+		mAdapterMovies = new MoviesRecyclerViewAdapter();
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+		mRecyclerViewMovies.setHasFixedSize(false);
+		mRecyclerViewMovies.setLayoutManager(linearLayoutManager);
+		mRecyclerViewMovies.setAdapter(mAdapterMovies);
+
+		startLoading();
+
 		if (NetworkUtilities.isNetworkAvailable(this)) {
+			mTvError.setVisibility(View.INVISIBLE);
 			Retrofit retrofit = new Retrofit.Builder()
 					.baseUrl(MoviesRestApi.BASE_URL)
 					.addConverterFactory(GsonConverterFactory.create())
@@ -40,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MoviesCallbak.Mov
 			Callback<DbMoviesQuery> moviesCallback = new MoviesCallbak(this);
 			moviesCall.enqueue(moviesCallback);
 		} else {
-			Toast.makeText(this, "NO NETWORK", Toast.LENGTH_SHORT).show();
+			mTvError.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -54,9 +70,8 @@ public class MainActivity extends AppCompatActivity implements MoviesCallbak.Mov
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_details:
-				/*Intent intentDetails = new Intent(this, DetailsActivity.class);
-				startActivity(intentDetails);*/
-				Toast.makeText(this, "api " + BuildConfig.MOVIES_API_KEY, Toast.LENGTH_SHORT).show();
+				Intent intentDetails = new Intent(this, DetailsActivity.class);
+				startActivity(intentDetails);
 				break;
 			case R.id.action_settings:
 				Intent intentSettings = new Intent(this, SettingsActivity.class);
@@ -66,15 +81,26 @@ public class MainActivity extends AppCompatActivity implements MoviesCallbak.Mov
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void startLoading() {
+		mProgressBar.setVisibility(View.VISIBLE);
+		mRecyclerViewMovies.setVisibility(View.INVISIBLE);
+	}
+
 	@Override
 	public void onLoadFinished(DbMoviesQuery dbMoviesQuery) {
+		mProgressBar.setVisibility(View.INVISIBLE);
 		if (dbMoviesQuery.getResults()!=null) {
-			mTvHello.setText("" + dbMoviesQuery.getResults().size());
+			mAdapterMovies.setmDbMoviesQuery(dbMoviesQuery);
+			mRecyclerViewMovies.setVisibility(View.VISIBLE);
 		}
 	}
 
 	@Override
 	public void onLoadFailed() {
-		Toast.makeText(this, "there was a problem", Toast.LENGTH_SHORT).show();
+		mProgressBar.setVisibility(View.INVISIBLE);
+		mRecyclerViewMovies.setVisibility(View.INVISIBLE);
+		mTvError.setText(R.string.query_error);
+		mTvError.setVisibility(View.VISIBLE);
+
 	}
 }
