@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.adiaz.movies.data.MoviesContract;
+import com.adiaz.movies.utilities.MoviesConstants;
 
 
 /* Created by toni on 06/02/2017. */
@@ -40,9 +40,8 @@ public class MoviesRecyclerViewAdapter extends RecyclerView.Adapter<MoviesRecycl
 	@Override
 	public void onBindViewHolder(MoviesViewHolder holder, int position) {
 		if (mCursorMovies!=null) {
-			int titleIndex = mCursorMovies.getColumnIndex(MoviesContract.MovieEntity.COLUMN_TITLE);
 			mCursorMovies.moveToPosition(position);
-			String title = mCursorMovies.getString(titleIndex);
+			String title = mCursorMovies.getString(MoviesConstants.INDEX_MOVIE_ORIGINAL_TITLE);
 			holder.mTvTitle.setText(position + " " + title);
 		}
 	}
@@ -74,10 +73,8 @@ public class MoviesRecyclerViewAdapter extends RecyclerView.Adapter<MoviesRecycl
 
 		@Override
 		public void onClick(View view) {
-			int indexId = mCursorMovies.getColumnIndex(MoviesContract.MovieEntity._ID);
 			mCursorMovies.moveToPosition(getAdapterPosition());
-
-			mOnClickListener.onListItemClick(mCursorMovies.getInt(indexId));
+			mOnClickListener.onListItemClick(mCursorMovies.getInt(MoviesConstants.INDEX_MOVIE_ID));
 		}
 	}
 }

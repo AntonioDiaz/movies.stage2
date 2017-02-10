@@ -10,6 +10,7 @@ import com.adiaz.movies.MainActivity;
 import com.adiaz.movies.data.MoviesContract;
 import com.adiaz.movies.entities.DbMoviesQuery;
 import com.adiaz.movies.entities.Movie;
+import com.adiaz.movies.utilities.MoviesConstants;
 import com.adiaz.movies.utilities.PreferencesUtilities;
 import com.adiaz.movies.utilities.SyncMoviesUtilities;
 
@@ -59,7 +60,10 @@ public class MoviesAsyncTask extends AsyncTask<Void, Void, Void> {
 				.build();
 		MoviesRestApi moviesRestApi = retrofit.create(MoviesRestApi.class);
 		// TODO: 09/02/2017 delete all but favorites
-		int deletes = mContext.getContentResolver().delete(MoviesContract.MovieEntity.CONTENT_URI, null, null);
+
+		String selection = MoviesContract.MovieEntity.COLUMN_IS_FAVORITE + "!=?";
+		String[] args = new String[]{MoviesConstants.FAVORITE_YES.toString()};
+		int deletes = mContext.getContentResolver().delete(MoviesContract.MovieEntity.CONTENT_URI, selection, args);
 		try {
 			for (int i = 0; i < MainActivity.PAGES; i++) {
 				int page = i + 1;
@@ -76,13 +80,11 @@ public class MoviesAsyncTask extends AsyncTask<Void, Void, Void> {
 					mContext.getContentResolver().bulkInsert(MoviesContract.MovieEntity.CONTENT_URI, moviesArray);
 				}
 			}
-						/*set last update data*/
+			/* set last update data */
 			PreferencesUtilities.shaveUpdateMoviesDate(mContext);
 		} catch (IOException e) {
 			Log.e(TAG, "loadInBackground: " + e.toString());
 		}
 		return null;
 	}
-
-
 }

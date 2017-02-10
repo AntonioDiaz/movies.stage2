@@ -54,7 +54,7 @@ public class PreferencesUtilities {
 		String minutesRefreshKey = context.getString(R.string.pref_refresh_key);
 		String minutesRefreshDefault = context.getString(R.string.pref_refresh_default);
 		String minutesRefreshStr = sharedPreferences.getString(minutesRefreshKey, minutesRefreshDefault);
-		long milisecondsRefresh = Long.parseLong(minutesRefreshStr) * Constants.MINUTE_IN_MILLIS;
+		long milisecondsRefresh = Long.parseLong(minutesRefreshStr) * MoviesConstants.MINUTE_IN_MILLIS;
 		long actualMiliseconds = new Date().getTime();
 		boolean refreshNecesary = false;
 		if (lastUpdateMiliseconds + milisecondsRefresh < actualMiliseconds) {

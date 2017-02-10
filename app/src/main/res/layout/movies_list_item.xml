@@ -9,7 +9,7 @@
         android:id="@+id/tv_list_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/list_item_title_example"
+        tools:text="@string/title_example"
         android:textSize="20sp"/>
     <View
         android:layout_width="match_parent"

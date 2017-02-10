@@ -5,7 +5,8 @@
     <string name="action_settings">settings</string>
     <string name="app_name_preferences">Settings</string>
     <string name="internet_error">This app needs internet connection available.</string>
-    <string name="list_item_title_example">The last mohican</string>
+    <string name="title_example">The last mohican</string>
+    <string name="popularity_example">123.537721</string>
     <string name="query_error">Ups, something worng happend, please try again after a while</string>
 
     <!--preferences strings-->
@@ -32,5 +33,6 @@
     <string name="pref_refresh_hour_label">every hour</string>
     <string name="pref_refresh_day_label">every day</string>
     <string name="pref_refresh_week_label">every week</string>
+    <string name="action_add_favorites">add favorites</string>
 
 </resources>

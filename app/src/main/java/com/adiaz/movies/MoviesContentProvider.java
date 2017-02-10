@@ -144,7 +144,23 @@ public class MoviesContentProvider extends ContentProvider {
 
 	@Override
 	public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-		return 0;
+		int recordsUpdated = 0;
+		switch (sUriMatcher.match(uri)) {
+			case MOVIES_WITH_ID:
+				SQLiteDatabase writableDatabase = mMoviesDbHelper.getWritableDatabase();
+				String id = uri.getPathSegments().get(1);
+				String mSelection = "_id =?";
+				String[] mSelectionArgs = new String[]{id};
+				recordsUpdated = writableDatabase.update(MoviesContract.MovieEntity.TABLE_NAME, contentValues, mSelection, mSelectionArgs);
+				break;
+			default:
+				String strError = getContext().getString(R.string.operation_forbidden) + " " + uri;
+				throw new UnsupportedOperationException(strError);
+		}
+		if (recordsUpdated>0) {
+			getContext().getContentResolver().notifyChange(uri, null);
+		}
+		return recordsUpdated;
 	}
 
 	/**
@@ -158,5 +174,4 @@ public class MoviesContentProvider extends ContentProvider {
 		mMoviesDbHelper.close();
 		super.shutdown();
 	}
-
 }

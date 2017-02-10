@@ -18,8 +18,12 @@ public class SyncMoviesUtilities {
 		int cont = 0;
 		for (Movie movie : moviesList) {
 			ContentValues contentValuesTemp = new ContentValues();
-			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_TITLE, movie.getTitle());
-			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_POPULARITY, movie.getPopularity());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_ID_ORIGINAL, movie.getId());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_ORIGINAL_TITLE, movie.getOriginalTitle());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_POSTER_PATH, movie.getPosterPath());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_OVERVIEW, movie.getOverview());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_USER_RATING, movie.getVoteAverage());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_RELEASE_DATE, movie.getReleaseDate());
 			contentValues[cont++] = contentValuesTemp;
 		}
 		return contentValues;
