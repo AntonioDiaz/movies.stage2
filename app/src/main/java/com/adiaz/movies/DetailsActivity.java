@@ -22,6 +22,9 @@ public class DetailsActivity extends AppCompatActivity {
 	private TextView mTvTitle;
 	private ImageView mIvPoster;
 	private ImageView mIvFavorites;
+	private TextView mTvReleaseDate;
+	private TextView mTvUserRating;
+	private TextView mTvPlot;
 	private int mIdMovie;
 	private Cursor mCursor;
 	
@@ -32,11 +35,17 @@ public class DetailsActivity extends AppCompatActivity {
 		mTvTitle = (TextView) findViewById(R.id.tv_detail_title);
 		mIvPoster = (ImageView) findViewById(R.id.iv_detail_poster);
 		mIvFavorites = (ImageView) findViewById(R.id.iv_detail_favorites);
+		mTvReleaseDate = (TextView) findViewById(R.id.tv_detail_release_date);
+		mTvUserRating = (TextView) findViewById(R.id.tv_detail_user_rating);
+		mTvPlot = (TextView) findViewById(R.id.tv_detail_plot);
 		Uri uriMovie = getIntent().getData();
 		if (uriMovie!=null) {
 			mCursor = getContentResolver().query(uriMovie, null, null, null, null);
 			mCursor.moveToFirst();
 			mTvTitle.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_ORIGINAL_TITLE));
+			mTvReleaseDate.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_RELEASE_DATE));
+			mTvUserRating.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_USER_RATING));
+			mTvPlot.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_OVERVIEW));
 			int favorite = mCursor.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
 			if (MoviesConstants.FAVORITE_YES==favorite) {
 				mIvFavorites.setImageResource(R.drawable.ic_hearth_selected);
@@ -47,8 +56,9 @@ public class DetailsActivity extends AppCompatActivity {
 			String imageUrl = MoviesConstants.IMAGES_PATH + mCursor.getString(MoviesConstants.INDEX_MOVIE_POSTER_PATH);
 			Picasso.with(this)
 					.load(imageUrl)
-					.fit().centerCrop()
-					.placeholder(R.drawable.test)
+					.resize(400, 600)
+					.centerInside()
+					.placeholder(R.drawable.progress_animation)
 					.into(mIvPoster);
 		}
 	}
@@ -90,7 +100,9 @@ public class DetailsActivity extends AppCompatActivity {
 		}
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(MoviesContract.MovieEntity.COLUMN_IS_FAVORITE, newFavorites);
-		Uri uriUpdate = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(String.valueOf(mIdMovie)).build();
-		getContentResolver().update(uriUpdate, contentValues, null, null);
+		Uri uriMovie = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(String.valueOf(mIdMovie)).build();
+		getContentResolver().update(uriMovie, contentValues, null, null);
+		mCursor = getContentResolver().query(uriMovie, null, null, null, null);
+		mCursor.moveToFirst();
 	}
 }
