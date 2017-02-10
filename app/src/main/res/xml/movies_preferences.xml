@@ -8,4 +8,12 @@
         android:title="@string/pref_sort_title"
         app:key="@string/pref_sort_key"
         ></ListPreference>
+
+    <ListPreference
+        android:defaultValue="@string/pref_refresh_default"
+        android:entries="@array/frecuency_labels"
+        android:entryValues="@array/frecuency_values"
+        android:title="@string/pref_refresh_title"
+        app:key="@string/pref_refresh_key"
+        ></ListPreference>
 </PreferenceScreen>

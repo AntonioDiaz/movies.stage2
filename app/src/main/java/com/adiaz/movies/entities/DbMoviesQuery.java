@@ -13,7 +13,7 @@ public class DbMoviesQuery {
     private Integer page;
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<Movie> movies = null;
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
@@ -29,12 +29,12 @@ public class DbMoviesQuery {
         this.page = page;
     }
 
-    public List<Result> getResults() {
-        return results;
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
     public Integer getTotalResults() {

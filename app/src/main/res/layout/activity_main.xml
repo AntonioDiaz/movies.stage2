@@ -11,19 +11,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.adiaz.movies.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/ll_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"
+        android:orientation="vertical">
     <ProgressBar
         android:id="@+id/pb_movies"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:visibility="invisible"/>
+        android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/loading_message"
+            tools:text="@string/loading_message"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/internet_error"
-        android:textSize="22sp"
-        android:layout_gravity="center"
+        android:textSize="16sp"
         android:textColor="@color/colorAccent"
         android:visibility="invisible"/>
 

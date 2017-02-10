@@ -16,5 +16,21 @@
     <string name="pref_sort_value_defaul">@string/pref_sort_value_popularity</string>
     <string name="pref_sort_label_popularity">Popularity</string>
     <string name="pref_sort_label_top_rated">Top Rated</string>
+    <string name="loading_message">Updating movies</string>
+    <string name="operation_forbidden">operation not allowed</string>
+    <string name="pref_last_update_date">pref_last_update_date</string>
+
+    <string name="pref_refresh_title">Refresh movies frecuency</string>
+    <string name="pref_refresh_key">pref_refresh_key</string>
+    <!--Using minutes to calculate next refresh-->
+    <string name="pref_refresh_default">60</string>
+    <string name="pref_refresh_minute_value" translatable="false">1</string>
+    <string name="pref_refresh_hour_value" translatable="false">60</string>
+    <string name="pref_refresh_day_value" translatable="false">1440</string>
+    <string name="pref_refresh_week_value" translatable="false">10080</string>
+    <string name="pref_refresh_minute_label">every minute</string>
+    <string name="pref_refresh_hour_label">every hour</string>
+    <string name="pref_refresh_day_label">every day</string>
+    <string name="pref_refresh_week_label">every week</string>
 
 </resources>

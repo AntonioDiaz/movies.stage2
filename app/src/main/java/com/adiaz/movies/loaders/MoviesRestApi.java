@@ -1,4 +1,4 @@
-package com.adiaz.movies;
+package com.adiaz.movies.loaders;
 
 import com.adiaz.movies.entities.DbMoviesQuery;
 

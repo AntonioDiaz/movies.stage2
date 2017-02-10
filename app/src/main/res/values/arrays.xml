@@ -8,4 +8,16 @@
         <item>@string/pref_sort_value_popularity</item>
         <item>@string/pref_sort_value_top_rated</item>
     </string-array>
+    <string-array name="frecuency_labels">
+        <item>@string/pref_refresh_minute_label</item>
+        <item>@string/pref_refresh_hour_label</item>
+        <item>@string/pref_refresh_day_label</item>
+        <item>@string/pref_refresh_week_label</item>
+    </string-array>
+    <string-array name="frecuency_values">
+        <item>@string/pref_refresh_minute_value</item>
+        <item>@string/pref_refresh_hour_value</item>
+        <item>@string/pref_refresh_day_value</item>
+        <item>@string/pref_refresh_week_value</item>
+    </string-array>
 </resources>

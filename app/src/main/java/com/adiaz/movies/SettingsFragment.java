@@ -7,7 +7,7 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
-import com.adiaz.movies.R;
+import com.adiaz.movies.utilities.PreferencesUtilities;
 
 /**
  * Created by toni on 06/02/2017.
@@ -50,6 +50,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 			int indexOfValue = listPreference.findIndexOfValue(value);
 			if (indexOfValue>=0) {
 				listPreference.setSummary(listPreference.getEntries()[indexOfValue]);
+			}
+			if (getString(R.string.pref_refresh_key).equals(preference.getKey())) {
+				String strDate = PreferencesUtilities.getLastUpdateString(getContext());
+				String newSummary = listPreference.getSummary() + " (last update: "+ strDate +")";
+				listPreference.setSummary(newSummary);
 			}
 		}
 	}
