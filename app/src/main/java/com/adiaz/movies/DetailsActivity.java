@@ -8,42 +8,48 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adiaz.movies.data.MoviesContract;
 import com.adiaz.movies.utilities.MoviesConstants;
+import com.squareup.picasso.Picasso;
 
 public class DetailsActivity extends AppCompatActivity {
 
 	// TODO: 10/02/2017 use ButterKnife for access to Views.
 	private TextView mTvTitle;
-	private TextView mTvPopularity;
+	private ImageView mIvPoster;
+	private ImageView mIvFavorites;
 	private int mIdMovie;
-
+	private Cursor mCursor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 		mTvTitle = (TextView) findViewById(R.id.tv_detail_title);
-		mTvPopularity = (TextView) findViewById(R.id.tv_detail_popularity);
+		mIvPoster = (ImageView) findViewById(R.id.iv_detail_poster);
+		mIvFavorites = (ImageView) findViewById(R.id.iv_detail_favorites);
 		Uri uriMovie = getIntent().getData();
 		if (uriMovie!=null) {
-			Cursor cursor = null;
-			try {
-				cursor = getContentResolver().query(uriMovie, null, null, null, null);
-				cursor.moveToFirst();
-				mTvTitle.setText(cursor.getString(MoviesConstants.INDEX_MOVIE_ORIGINAL_TITLE));
-				mTvPopularity.setText(cursor.getString(MoviesConstants.INDEX_MOVIE_RELEASE_DATE));
-				int isFavorite = cursor.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
-				mIdMovie = cursor.getInt(MoviesConstants.INDEX_MOVIE_ID);
-				Toast.makeText(this, "" + isFavorite, Toast.LENGTH_SHORT).show();
-			} finally {
-				if (cursor!=null) {
-					cursor.close();
-				}
+			mCursor = getContentResolver().query(uriMovie, null, null, null, null);
+			mCursor.moveToFirst();
+			mTvTitle.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_ORIGINAL_TITLE));
+			int favorite = mCursor.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
+			if (MoviesConstants.FAVORITE_YES==favorite) {
+				mIvFavorites.setImageResource(R.drawable.ic_hearth_selected);
+			} else {
+				mIvFavorites.setImageResource(R.drawable.ic_hearth_unselected);
 			}
+			mIdMovie = mCursor.getInt(MoviesConstants.INDEX_MOVIE_ID);
+			String imageUrl = MoviesConstants.IMAGES_PATH + mCursor.getString(MoviesConstants.INDEX_MOVIE_POSTER_PATH);
+			Picasso.with(this)
+					.load(imageUrl)
+					.fit().centerCrop()
+					.placeholder(R.drawable.test)
+					.into(mIvPoster);
 		}
 	}
 
@@ -60,13 +66,31 @@ public class DetailsActivity extends AppCompatActivity {
 				Intent intentSettings = new Intent(this, SettingsActivity.class);
 				startActivity(intentSettings);
 				break;
-			case R.id.action_add_favorites:
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(MoviesContract.MovieEntity.COLUMN_IS_FAVORITE, MoviesConstants.FAVORITE_YES);
-				Uri uriUpdate = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(String.valueOf(mIdMovie)).build();
-				getContentResolver().update(uriUpdate, contentValues, null, null);
-				break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (mCursor !=null) {
+			mCursor.close();
+		}
+		super.onDestroy();
+	}
+
+	public void updateFavorites(View view) {
+		int actualFavorites = mCursor.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
+		int newFavorites;
+		if (MoviesConstants.FAVORITE_YES==actualFavorites) {
+			newFavorites = MoviesConstants.FAVORITE_NOT;
+			mIvFavorites.setImageResource(R.drawable.ic_hearth_unselected);
+		} else {
+			newFavorites = MoviesConstants.FAVORITE_YES;
+			mIvFavorites.setImageResource(R.drawable.ic_hearth_selected);
+		}
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(MoviesContract.MovieEntity.COLUMN_IS_FAVORITE, newFavorites);
+		Uri uriUpdate = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(String.valueOf(mIdMovie)).build();
+		getContentResolver().update(uriUpdate, contentValues, null, null);
 	}
 }

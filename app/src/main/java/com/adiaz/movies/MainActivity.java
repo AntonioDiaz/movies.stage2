@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +23,11 @@ import com.adiaz.movies.utilities.NetworkUtilities;
 import com.adiaz.movies.utilities.PreferencesUtilities;
 
 
-// TODO: 09/02/2017 add possibility the user to choose the number of films.
+// TODO: 09/02/2017 add possibility the user to choose the number of films on the list.
 // TODO: 10/02/2017 save scroll position in RecyclerView list to go after back.
+// TODO: 10/02/2017 take out integer from strings.xml and add to integers.xml
+// TODO: 10/02/2017 Hide menu options.
+// TODO: 10/02/2017 change test image.
 public class MainActivity extends AppCompatActivity
 		implements
 			SharedPreferences.OnSharedPreferenceChangeListener,
@@ -49,9 +52,10 @@ public class MainActivity extends AppCompatActivity
 		mRecyclerViewMovies = (RecyclerView) findViewById(R.id.rv_movies);
 		mLoadingView = findViewById(R.id.ll_loading);
 		mAdapterMovies = new MoviesRecyclerViewAdapter(this);
-		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+		int columns = getResources().getInteger(R.integer.grid_columns);
+		GridLayoutManager gridLayoutManager = new GridLayoutManager(this, columns);
 		mRecyclerViewMovies.setHasFixedSize(false);
-		mRecyclerViewMovies.setLayoutManager(linearLayoutManager);
+		mRecyclerViewMovies.setLayoutManager(gridLayoutManager);
 		mRecyclerViewMovies.setAdapter(mAdapterMovies);
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 	}

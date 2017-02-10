@@ -32,4 +32,6 @@ public class MoviesConstants {
 
 	public static final Integer FAVORITE_YES = 1;
 	public static final Integer FAVORITE_NOT = 0;
+
+	public static final String IMAGES_PATH = "http://image.tmdb.org/t/p/w185/";
 }

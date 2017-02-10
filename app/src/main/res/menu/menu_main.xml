@@ -5,5 +5,5 @@
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="2"
-        app:showAsAction="always"></item>
+        app:showAsAction="collapseActionView"></item>
 </menu>
