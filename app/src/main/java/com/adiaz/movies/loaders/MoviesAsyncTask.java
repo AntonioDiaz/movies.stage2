@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.adiaz.movies.BuildConfig;
-import com.adiaz.movies.MainActivity;
 import com.adiaz.movies.data.MoviesContract;
 import com.adiaz.movies.entities.DbMoviesQuery;
 import com.adiaz.movies.entities.Movie;
@@ -63,9 +62,10 @@ public class MoviesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		String selection = MoviesContract.MovieEntity.COLUMN_IS_FAVORITE + "!=?";
 		String[] args = new String[]{MoviesConstants.FAVORITE_YES.toString()};
-		int deletes = mContext.getContentResolver().delete(MoviesContract.MovieEntity.CONTENT_URI, selection, args);
+		mContext.getContentResolver().delete(MoviesContract.MovieEntity.CONTENT_URI, selection, args);
 		try {
-			for (int i = 0; i < MainActivity.PAGES; i++) {
+			int pages = PreferencesUtilities.getPagesToQuery(mContext);
+			for (int i = 0; i < pages; i++) {
 				int page = i + 1;
 				Call<DbMoviesQuery> dbMoviesQueryCall;
 				if (PreferencesUtilities.sortByPopularity(mContext)) {

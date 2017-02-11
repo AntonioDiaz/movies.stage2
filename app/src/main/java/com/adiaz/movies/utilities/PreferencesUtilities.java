@@ -62,4 +62,19 @@ public class PreferencesUtilities {
 		}
 		return refreshNecesary;
 	}
+
+	public static boolean isFavoritesFirstChecked(Context context) {
+		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		String checkFavoritesFirst = context.getString(R.string.pref_favorites_first_key);
+		boolean checked = defaultSharedPreferences.getBoolean(checkFavoritesFirst, true);
+		return checked;
+	}
+
+	public static int getPagesToQuery(Context context) {
+		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+		String listSizeKey = context.getString(R.string.pref_size_list_key);
+		String listSizeStr = defaultSharedPreferences.getString(listSizeKey, MoviesConstants.MOVIES_PER_PAGE.toString());
+		Integer listSize = Integer.parseInt(listSizeStr);
+		return listSize / MoviesConstants.MOVIES_PER_PAGE;
+	}
 }

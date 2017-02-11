@@ -11,7 +11,7 @@ import com.adiaz.movies.data.MoviesContract.MovieEntity;
 public class MoviesDbHelper extends SQLiteOpenHelper {
 
 	public static final String DATABASE_NAME = "movies.db";
-	public static final int DATABASE_VERSION = 4;
+	public static final int DATABASE_VERSION = 7;
 
 	public MoviesDbHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,10 +26,11 @@ public class MoviesDbHelper extends SQLiteOpenHelper {
 						MovieEntity.COLUMN_ORIGINAL_TITLE + " TEXT NOT NULL," +
 						MovieEntity.COLUMN_POSTER_PATH + " TEXT NOT NULL," +
 						MovieEntity.COLUMN_OVERVIEW + " TEXT NOT NULL," +
-						MovieEntity.COLUMN_USER_RATING + " TEXT NOT NULL," +
+						MovieEntity.COLUMN_USER_RATING + " REAL NOT NULL," +
 						MovieEntity.COLUMN_RELEASE_DATE + " TEXT NOT NULL, " +
 						MovieEntity.COLUMN_IS_FAVORITE + " INTEGER NOT NULL DEFAULT 0, " +
 						MovieEntity.COLUMN_ID_ORIGINAL + " INTEGER NOT NULL, " +
+						MovieEntity.COLUMN_POPULARITY + " REAL NOT NULL, " +
 						"UNIQUE ("+ MovieEntity.COLUMN_ID_ORIGINAL +") ON CONFLICT IGNORE"+
 				")";
 		sqLiteDatabase.execSQL(SQL_CREATE_TABLE);

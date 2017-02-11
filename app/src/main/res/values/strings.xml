@@ -7,12 +7,16 @@
     <string name="internet_error">This app needs internet connection available.</string>
     <string name="details_release_label">Release</string>
     <string name="details_user_rating">User rating</string>
+    <string name="details_user_rating_value">%1$s / 10</string>
     <string name="example_title">The last mohican</string>
     <string name="example_popularity">123.537721</string>
     <string name="example_release_date">2016-06-18</string>
     <string name="example_user_rating">5.8 / 10</string>
     <string name="example_plot">The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.</string>
     <string name="query_error">Ups, something worng happend, please try again after a while</string>
+    <string name="loading_message">Updating movies</string>
+    <string name="operation_forbidden">operation not allowed</string>
+    <string name="action_add_favorites">add favorites</string>
 
     <!--preferences strings-->
     <string name="pref_sort_key">pref_sort_key</string>
@@ -22,10 +26,9 @@
     <string name="pref_sort_value_defaul">@string/pref_sort_value_popularity</string>
     <string name="pref_sort_label_popularity">Popularity</string>
     <string name="pref_sort_label_top_rated">Top Rated</string>
-    <string name="loading_message">Updating movies</string>
-    <string name="operation_forbidden">operation not allowed</string>
     <string name="pref_last_update_date">pref_last_update_date</string>
-
+    <string name="pref_favorites_first_key">pref_favorites_first_key</string>
+    <string name="pref_favorites_first_title">Show favorites first</string>
     <string name="pref_refresh_title">Refresh movies frecuency</string>
     <string name="pref_refresh_key">pref_refresh_key</string>
     <!--Using minutes to calculate next refresh-->
@@ -38,6 +41,11 @@
     <string name="pref_refresh_hour_label">every hour</string>
     <string name="pref_refresh_day_label">every day</string>
     <string name="pref_refresh_week_label">every week</string>
-    <string name="action_add_favorites">add favorites</string>
+    <string name="pref_size_list_key">pref_films_length_list_key</string>
+    <string name="pref_size_list_title">Movies List size</string>
+    <string name="pref_size_list_20">20 elements</string>
+    <string name="pref_size_list_60">60 elements</string>
+    <string name="pref_size_list_120">120 elements</string>
+    <string name="details_popularity_label">Popularity</string>
 
 </resources>

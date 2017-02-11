@@ -48,7 +48,7 @@ public class MoviesRecyclerViewAdapter extends RecyclerView.Adapter<MoviesRecycl
 					.load(imgUrl)
 					.resize(400, 600)
 					.centerInside()
-					.placeholder(R.drawable.progress_animation)
+					.placeholder(R.drawable.white)
 					.into(holder.mIvPoster);
 			int favorite = mCursorMovies.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
 			if (MoviesConstants.FAVORITE_YES==favorite) {

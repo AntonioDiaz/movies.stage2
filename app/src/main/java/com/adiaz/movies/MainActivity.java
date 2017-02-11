@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity
 			MoviesCursorLoader.LoadCursorListener,
 			MoviesRecyclerViewAdapter.ListItemClickListener {
 
-	public static final int PAGES = 1;
 	private static final short LOADER_CURSOR_ID = 23;
 	private static final String TAG = MainActivity.class.getSimpleName();
 	private TextView mTvError;
@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity
 		mRecyclerViewMovies.setLayoutManager(gridLayoutManager);
 		mRecyclerViewMovies.setAdapter(mAdapterMovies);
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+
 	}
+
 
 	@Override
 	protected void onStart() {
@@ -111,8 +113,10 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		if (getString(R.string.pref_sort_key).equals(key)) {
+		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		if (getString(R.string.pref_sort_key).equals(key)
+				|| getString(R.string.pref_favorites_first_key).equals(key)
+				|| getString(R.string.pref_size_list_key).equals(key)) {
 			refreshAdapter();
 		}
 	}
@@ -151,6 +155,8 @@ public class MainActivity extends AppCompatActivity
 
 	@Override
 	public void onListItemClick(int clickedItemIndex) {
+		mPosition = ((LinearLayoutManager)mRecyclerViewMovies.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+
 		Intent intent = new Intent(this, DetailsActivity.class);
 		String idStr = String.valueOf(clickedItemIndex);
 		Uri uriMovie = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(idStr).build();

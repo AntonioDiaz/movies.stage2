@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 import com.adiaz.movies.data.MoviesContract;
 import com.adiaz.movies.utilities.MoviesConstants;
+import com.adiaz.movies.utilities.PreferencesUtilities;
 
-/**
- * Created by toni on 09/02/2017.
- */
+import static android.content.ContentValues.TAG;
+
+/* Created by toni on 09/02/2017. */
 
 public class MoviesCursorLoader implements LoaderManager.LoaderCallbacks <Cursor> {
 
@@ -32,7 +34,19 @@ public class MoviesCursorLoader implements LoaderManager.LoaderCallbacks <Cursor
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		Uri uri = MoviesContract.MovieEntity.CONTENT_URI;
-		return new CursorLoader(mContext, uri, MoviesConstants.MAIN_MOVIES_PROJECTION, null, null, null);
+		String sortBy = "";
+		if (PreferencesUtilities.isFavoritesFirstChecked(mContext)) {
+			sortBy += MoviesContract.MovieEntity.COLUMN_IS_FAVORITE;
+			sortBy += " DESC, ";
+		}
+		if (PreferencesUtilities.sortByPopularity(mContext)) {
+			sortBy += MoviesContract.MovieEntity.COLUMN_POPULARITY;
+		} else {
+			sortBy += MoviesContract.MovieEntity.COLUMN_USER_RATING;
+		}
+		sortBy += " DESC ";
+		Log.d(TAG, "onCreateLoader: " + sortBy);
+		return new CursorLoader(mContext, uri, MoviesConstants.MAIN_MOVIES_PROJECTION, null, null, sortBy);
 	}
 
 	@Override

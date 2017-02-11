@@ -24,6 +24,7 @@ public class SyncMoviesUtilities {
 			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_OVERVIEW, movie.getOverview());
 			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_USER_RATING, movie.getVoteAverage());
 			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_RELEASE_DATE, movie.getReleaseDate());
+			contentValuesTemp.put(MoviesContract.MovieEntity.COLUMN_POPULARITY, movie.getPopularity());
 			contentValues[cont++] = contentValuesTemp;
 		}
 		return contentValues;

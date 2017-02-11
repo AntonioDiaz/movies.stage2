@@ -25,6 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
 	private TextView mTvReleaseDate;
 	private TextView mTvUserRating;
 	private TextView mTvPlot;
+	private TextView mTvPopularity;
 	private int mIdMovie;
 	private Cursor mCursor;
 	
@@ -38,14 +39,17 @@ public class DetailsActivity extends AppCompatActivity {
 		mTvReleaseDate = (TextView) findViewById(R.id.tv_detail_release_date);
 		mTvUserRating = (TextView) findViewById(R.id.tv_detail_user_rating);
 		mTvPlot = (TextView) findViewById(R.id.tv_detail_plot);
+		mTvPopularity = (TextView) findViewById(R.id.tv_detail_popularity);
 		Uri uriMovie = getIntent().getData();
 		if (uriMovie!=null) {
-			mCursor = getContentResolver().query(uriMovie, null, null, null, null);
+			mCursor = getContentResolver().query(uriMovie, MoviesConstants.MAIN_MOVIES_PROJECTION, null, null, null);
 			mCursor.moveToFirst();
 			mTvTitle.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_ORIGINAL_TITLE));
 			mTvReleaseDate.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_RELEASE_DATE));
-			mTvUserRating.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_USER_RATING));
+			String rating = Float.toString(mCursor.getFloat(MoviesConstants.INDEX_MOVIE_USER_RATING));
+			mTvUserRating.setText(getString(R.string.details_user_rating_value, rating));
 			mTvPlot.setText(mCursor.getString(MoviesConstants.INDEX_MOVIE_OVERVIEW));
+			mTvPopularity.setText(Float.toString(mCursor.getFloat(MoviesConstants.INDEX_MOVIE_POPULARITY)));
 			int favorite = mCursor.getInt(MoviesConstants.INDEX_MOVIE_IS_FAVORITE);
 			if (MoviesConstants.FAVORITE_YES==favorite) {
 				mIvFavorites.setImageResource(R.drawable.ic_hearth_selected);
@@ -102,7 +106,7 @@ public class DetailsActivity extends AppCompatActivity {
 		contentValues.put(MoviesContract.MovieEntity.COLUMN_IS_FAVORITE, newFavorites);
 		Uri uriMovie = MoviesContract.MovieEntity.CONTENT_URI.buildUpon().appendPath(String.valueOf(mIdMovie)).build();
 		getContentResolver().update(uriMovie, contentValues, null, null);
-		mCursor = getContentResolver().query(uriMovie, null, null, null, null);
+		mCursor = getContentResolver().query(uriMovie, MoviesConstants.MAIN_MOVIES_PROJECTION, null, null, null);
 		mCursor.moveToFirst();
 	}
 }

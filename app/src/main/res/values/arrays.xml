@@ -20,4 +20,15 @@
         <item>@string/pref_refresh_day_value</item>
         <item>@string/pref_refresh_week_value</item>
     </string-array>
+    <string-array name="size_list_label">
+        <item>@string/pref_size_list_20</item>
+        <item>@string/pref_size_list_60</item>
+        <item>@string/pref_size_list_120</item>
+    </string-array>
+    <string-array name="size_list_values">
+        <item>20</item>
+        <item>60</item>
+        <item>120</item>
+    </string-array>
+
 </resources>
