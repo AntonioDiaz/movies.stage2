@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adiaz.movies.adapters.TrailersAdapter;
 import com.adiaz.movies.entities.videos.DbMoviesVideos;
@@ -57,12 +58,16 @@ public class TrailersActivity extends AppCompatActivity implements Callback<DbMo
 	public void onResponse(Call<DbMoviesVideos> call, Response<DbMoviesVideos> response) {
 		lloadingTrailers.setVisibility(View.INVISIBLE);
 		if (response.isSuccessful() && response.body() != null) {
-			List<Video> reviews = response.body().getVideos();
-			TrailersAdapter trailersAdapter = new TrailersAdapter(this, reviews);
-			ListView listView = (ListView) findViewById(R.id.list_trailers);
-			listView.setAdapter(trailersAdapter);
-			trailersAdapter.notifyDataSetChanged();
-			listView.setVisibility(View.VISIBLE);
+			if (response.body().getVideos().size()==0) {
+				Toast.makeText(this, getString(R.string.no_trailers), Toast.LENGTH_SHORT).show();
+			} else {
+				List<Video> reviews = response.body().getVideos();
+				TrailersAdapter trailersAdapter = new TrailersAdapter(this, reviews);
+				ListView listView = (ListView) findViewById(R.id.list_trailers);
+				listView.setAdapter(trailersAdapter);
+				trailersAdapter.notifyDataSetChanged();
+				listView.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 

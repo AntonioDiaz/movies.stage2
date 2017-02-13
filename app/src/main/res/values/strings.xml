@@ -28,6 +28,9 @@
     <string name="trailers_title">Trailers</string>
     <string name="loading_reviews">Loading reviews</string>
     <string name="loading_trailers">Loading trailers</string>
+    <string name="no_reviews">There are no reviews yet</string>
+    <string name="no_trailers">There are no videos yet</string>
+
 
     <!--preferences strings-->
     <string name="pref_sort_key">pref_sort_key</string>

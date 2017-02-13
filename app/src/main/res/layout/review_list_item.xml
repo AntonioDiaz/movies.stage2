@@ -19,9 +19,4 @@
         tools:text="@string/example_review"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:typeface="sans"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorAccent"
-        android:layout_marginBottom="16dp"></View>
 </LinearLayout>
