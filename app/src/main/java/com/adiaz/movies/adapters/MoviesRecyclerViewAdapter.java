@@ -1,4 +1,4 @@
-package com.adiaz.movies;
+package com.adiaz.movies.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.adiaz.movies.R;
 import com.adiaz.movies.utilities.MoviesConstants;
 import com.squareup.picasso.Picasso;
 

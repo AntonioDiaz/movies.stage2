@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.adiaz.movies.adapters.MoviesRecyclerViewAdapter;
 import com.adiaz.movies.data.MoviesContract;
 import com.adiaz.movies.loaders.MoviesAsyncTask;
 import com.adiaz.movies.loaders.MoviesCursorLoader;

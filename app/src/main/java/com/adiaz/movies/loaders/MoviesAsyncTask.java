@@ -54,7 +54,7 @@ public class MoviesAsyncTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... voids) {
 		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(MoviesRestApi.BASE_URL)
+				.baseUrl(MoviesConstants.BASE_URL)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
 		MoviesRestApi moviesRestApi = retrofit.create(MoviesRestApi.class);

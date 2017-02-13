@@ -20,7 +20,8 @@ public class MoviesConstants {
 			MoviesContract.MovieEntity.COLUMN_USER_RATING,
 			MoviesContract.MovieEntity.COLUMN_RELEASE_DATE,
 			MoviesContract.MovieEntity.COLUMN_IS_FAVORITE,
-			MoviesContract.MovieEntity.COLUMN_POPULARITY
+			MoviesContract.MovieEntity.COLUMN_POPULARITY,
+			MoviesContract.MovieEntity.COLUMN_ID_ORIGINAL
 	};
 
 	public static final int INDEX_MOVIE_ID = 0;
@@ -31,6 +32,7 @@ public class MoviesConstants {
 	public static final int INDEX_MOVIE_RELEASE_DATE = 5;
 	public static final int INDEX_MOVIE_IS_FAVORITE = 6;
 	public static final int INDEX_MOVIE_POPULARITY = 7;
+	public static final int INDEX_MOVIE_ID_ORIGINAL = 8;
 
 	public static final Integer FAVORITE_YES = 1;
 	public static final Integer FAVORITE_NOT = 0;
@@ -38,4 +40,7 @@ public class MoviesConstants {
 	public static final String IMAGES_PATH = "http://image.tmdb.org/t/p/w185/";
 
 	public static final Integer MOVIES_PER_PAGE = 20;
+
+	public static final String BASE_URL = "http://api.themoviedb.org";
+	public static final String YOUTUBE_URL = "http://www.youtube.com/watch?v=";
 }

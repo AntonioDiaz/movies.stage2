@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="app_name_details">Details</string>
+    <string name="app_name_reviews">Reviews</string>
+    <string name="app_name_trailers">Trailers</string>
     <string name="action_details">details</string>
     <string name="action_settings">settings</string>
     <string name="app_name_preferences">Settings</string>
@@ -13,10 +15,19 @@
     <string name="example_release_date">2016-06-18</string>
     <string name="example_user_rating">5.8 / 10</string>
     <string name="example_plot">The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.</string>
+    <string name="example_review_author">Mr. Reviewer</string>
+    <string name="example_review">**Street pets versus the house pets! A day adventure in a big city</string>
     <string name="query_error">Ups, something worng happend, please try again after a while</string>
     <string name="loading_message">Updating movies</string>
     <string name="operation_forbidden">operation not allowed</string>
     <string name="action_add_favorites">add favorites</string>
+    <string name="details_popularity_label">Popularity</string>
+    <string name="show_reviews">Reviews</string>
+    <string name="show_trailers">Trailers</string>
+    <string name="reviews_title">Reviews</string>
+    <string name="trailers_title">Trailers</string>
+    <string name="loading_reviews">Loading reviews</string>
+    <string name="loading_trailers">Loading trailers</string>
 
     <!--preferences strings-->
     <string name="pref_sort_key">pref_sort_key</string>
@@ -46,6 +57,6 @@
     <string name="pref_size_list_20">20 elements</string>
     <string name="pref_size_list_60">60 elements</string>
     <string name="pref_size_list_120">120 elements</string>
-    <string name="details_popularity_label">Popularity</string>
+
 
 </resources>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.adiaz.movies">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.adiaz.movies">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,11 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Movies"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Movies">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -33,11 +35,28 @@
             android:name=".SettingsActivity"
             android:label="@string/app_name_preferences">
         </activity>
-        <provider
-            android:authorities="com.adiaz.movies"
-            android:name=".MoviesContentProvider"
-            android:exported="false"></provider>
 
+        <provider
+            android:name=".MoviesContentProvider"
+            android:authorities="com.adiaz.movies"
+            android:exported="false"/>
+
+        <activity android:name=".ReviewsActivity"
+            android:parentActivityName=".DetailsActivity"
+            android:label="@string/app_name_reviews">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailsActivity"
+                ></meta-data>
+        </activity>
+        <activity android:name=".TrailersActivity"
+            android:parentActivityName=".DetailsActivity"
+            android:label="@string/app_name_trailers">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailsActivity"
+                ></meta-data>
+        </activity>
     </application>
 
 </manifest>
