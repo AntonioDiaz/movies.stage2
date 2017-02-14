@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 	@Override
 		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (getString(R.string.pref_sort_key).equals(key)
-				|| getString(R.string.pref_favorites_first_key).equals(key)
+				|| getString(R.string.pref_favorites_only_key).equals(key)
 				|| getString(R.string.pref_size_list_key).equals(key)) {
 			refreshAdapter();
 		}

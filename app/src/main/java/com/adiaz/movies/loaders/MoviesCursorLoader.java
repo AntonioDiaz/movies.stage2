@@ -34,11 +34,13 @@ public class MoviesCursorLoader implements LoaderManager.LoaderCallbacks <Cursor
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		Uri uri = MoviesContract.MovieEntity.CONTENT_URI;
-		String sortBy = "";
-		if (PreferencesUtilities.isFavoritesFirstChecked(mContext)) {
-			sortBy += MoviesContract.MovieEntity.COLUMN_IS_FAVORITE;
-			sortBy += " DESC, ";
+		String selection = null;
+		String[] selectionArgs = null;
+		if (PreferencesUtilities.isFavoritesOnlyChecked(mContext)) {
+			selection = MoviesContract.MovieEntity.COLUMN_IS_FAVORITE + "=?";
+			selectionArgs = new String[]{"1"};
 		}
+		String sortBy = "";
 		if (PreferencesUtilities.sortByPopularity(mContext)) {
 			sortBy += MoviesContract.MovieEntity.COLUMN_POPULARITY;
 		} else {
@@ -46,7 +48,7 @@ public class MoviesCursorLoader implements LoaderManager.LoaderCallbacks <Cursor
 		}
 		sortBy += " DESC ";
 		Log.d(TAG, "onCreateLoader: " + sortBy);
-		return new CursorLoader(mContext, uri, MoviesConstants.MAIN_MOVIES_PROJECTION, null, null, sortBy);
+		return new CursorLoader(mContext, uri, MoviesConstants.MAIN_MOVIES_PROJECTION, selection, selectionArgs, sortBy);
 	}
 
 	@Override

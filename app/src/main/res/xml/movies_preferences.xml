@@ -19,16 +19,15 @@
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="@string/pref_favorites_first_key"
-        android:title="@string/pref_favorites_first_title">
+        android:key="@string/pref_favorites_only_key"
+        android:title="@string/pref_favorites_only_title">
     </CheckBoxPreference>
     <ListPreference
-        android:key="@string/pref_size_list_key"
-        android:title="@string/pref_size_list_title"
+        android:defaultValue="20"
         android:entries="@array/size_list_label"
         android:entryValues="@array/size_list_values"
-        android:defaultValue="20"
-        >
+        android:key="@string/pref_size_list_key"
+        android:title="@string/pref_size_list_title">
 
     </ListPreference>
 

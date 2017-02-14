@@ -63,9 +63,9 @@ public class PreferencesUtilities {
 		return refreshNecesary;
 	}
 
-	public static boolean isFavoritesFirstChecked(Context context) {
+	public static boolean isFavoritesOnlyChecked(Context context) {
 		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		String checkFavoritesFirst = context.getString(R.string.pref_favorites_first_key);
+		String checkFavoritesFirst = context.getString(R.string.pref_favorites_only_key);
 		boolean checked = defaultSharedPreferences.getBoolean(checkFavoritesFirst, true);
 		return checked;
 	}
