@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adiaz.movies.adapters.ReviewsAdapter;
 import com.adiaz.movies.entities.reviews.DbMoviesReviews;
@@ -57,12 +56,13 @@ public class ReviewsActivity extends AppCompatActivity implements Callback<DbMov
 	public void onResponse(Call<DbMoviesReviews> call, Response<DbMoviesReviews> response) {
 		lloadingReviews.setVisibility(View.INVISIBLE);
 		if (response.isSuccessful() && response.body() != null) {
+			ListView listView = (ListView) findViewById(R.id.list_reviews);
 			if (response.body().getReviews().size()==0) {
-				Toast.makeText(this, this.getString(R.string.no_reviews), Toast.LENGTH_SHORT).show();
+				View viewNoReviews = findViewById(R.id.tv_reviews_empty);
+				listView.setEmptyView(viewNoReviews);
 			} else {
 				List<Review> reviews = response.body().getReviews();
 				ReviewsAdapter reviewsAdapter = new ReviewsAdapter(this, reviews);
-				ListView listView = (ListView) findViewById(R.id.list_reviews);
 				listView.setAdapter(reviewsAdapter);
 				reviewsAdapter.notifyDataSetChanged();
 				listView.setVisibility(View.VISIBLE);

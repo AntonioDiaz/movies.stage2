@@ -62,5 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"></ListView>
+
+        <TextView
+            android:id="@+id/tv_trailers_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/no_trailers"
+            android:visibility="invisible"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
     </FrameLayout>
 </LinearLayout>
