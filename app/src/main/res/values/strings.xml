@@ -28,8 +28,9 @@
     <string name="trailers_title">Trailers</string>
     <string name="loading_reviews">Loading reviews</string>
     <string name="loading_trailers">Loading trailers</string>
-    <string name="no_reviews">There are no reviews yet</string>
-    <string name="no_trailers">There are no videos yet</string>
+    <string name="no_reviews">There is no review yet</string>
+    <string name="no_trailers">There is no video yet</string>
+    <string name="no_movies">There is no movie yet</string>
 
 
     <!--preferences strings-->

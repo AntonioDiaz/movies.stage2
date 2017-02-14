@@ -150,6 +150,10 @@ public class MainActivity extends AppCompatActivity
 				}
 				mRecyclerViewMovies.smoothScrollToPosition(mPosition);
 				mRecyclerViewMovies.setVisibility(View.VISIBLE);
+			} else {
+				mRecyclerViewMovies.setVisibility(View.INVISIBLE);
+				mTvError.setText(getString(R.string.no_movies));
+				mTvError.setVisibility(View.VISIBLE);
 			}
 		}
 	}
