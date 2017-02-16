@@ -43,4 +43,8 @@ public class MoviesConstants {
 
 	public static final String BASE_URL = "http://api.themoviedb.org";
 	public static final String YOUTUBE_URL = "http://www.youtube.com/watch?v=";
+
+	public static final String URL_ARGUMENT = "url_argument";
+	public static final String MOVIE_TITLE = "movie_title";
+	public static final String MOVIE_ORIGINAL_ID = "movie_original_id";
 }
